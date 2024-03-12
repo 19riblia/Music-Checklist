@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabaret Song Checker</title>
+    <style>
+        *{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            image-rendering: pixelated;
+        }
+
+        body{
+            padding: 20px;
+            overflow: hidden;
+            font-size: 1.3em;
+            background-color: #ffffff;
+            user-select: none;
+        }
+
+        .backing{
+            color: green;
+        }
+
+        .backing::after{
+            content: " (Needs Backing Track)";
+            font-weight: bold;
+        }
+
+        label:not(.backing){
+            color: red;
+        }
+
+        .tooltip{
+            font-weight: bold;
+            cursor:help;
+            text-decoration: underline;
+            text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.56);
+        }
+
+        input{
+            scale: 1.2;
+            width: 20px;
+            transform-origin: center;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <p><b>Act 1:</b></p>
+
+        <input type="checkbox" class="save-cb-state" id="Song1" name="Song1">
+        <label for="Song1" class="backing">Walking In A Winter Wonderland</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song2" name="Song2">
+        <label for="Song2">I'm Yours</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song3" name="Song3">
+        <label for="Song3">Monologue - Inivisble Friends</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song4" name="Song4">
+        <label for="Song4" class="backing">Christmas Lullaby</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song5" name="Song5">
+        <label for="Song5">Monologue - Ash Girl</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song6" name="Song6">
+        <label for="Song6">Mary Did You Know?</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song7" name="Song7">
+        <label for="Song7">Dualogue, Constellations</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song8" name="Song8">
+        <label for="Song8">The Swan</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song9" name="Song9">
+        <label for="Song9" class="backing">When I Grow Up</label>
+        <span class="tooltip" title="Put volume down to 20dB">[?]</span>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song10" name="Song10">
+        <label for="Song10" class="backing">Polar Express</label>
+        <span class="tooltip" title="put fvolume between 5 and 10">[?]</span>
+
+        <br>
+        <br>
+
+        <p><b>Act 2:</b></p>
+
+        <input type="checkbox" class="save-cb-state" id="Song11" name="Song11">
+        <label for="Song11">Christmas Peace</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song12" name="Song12">
+        <label for="Song12" class="backing">Santa Tell Me</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song13" name="Song13">
+        <label for="Song13">Monologue - Kinder Transport</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song14" name="Song14">
+        <label for="Song14" class="backing">Underneath The Tree</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song15" name="Song15">
+        <label for="Song15">Portsmouth</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song16" name="Song16">
+        <label for="Song16">Duologue - Lord of The Flies</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song17" name="Song17">
+        <label for="Song17" class="backing">Last Christmas</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song18" name="Song18">
+        <label for="Song18">Feliz Navidad</label>
+
+        <br>
+
+        <input type="checkbox" class="save-cb-state" id="Song19" name="Song19">
+        <label for="Song19" class="backing">Oh Holy Night</label>
+
+        <br>
+    </form>
+    <br>
+    <img style="display: inline; width: 55px;" src="https://stickershop.line-scdn.net/stickershop/v1/product/7738190/LINEStorePC/main.png?v=1">
+    <p style="display: inline; font-family: 'Times New Roman', Times, serif !important;"><i>gg ez</i></p>
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <!-- This JavaScript file is required to load the XpressDox interview as well as the code required to run it -->
+     
+    <script>
+    // Avoid scoping issues by encapsulating code inside anonymous function
+    (function() {
+      // variable to store our current state
+      var cbstate;
+      
+      // bind to the onload event
+      window.addEventListener('load', function() {
+        // Get the current state from localstorage
+        // State is stored as a JSON string
+        cbstate = JSON.parse(localStorage['CBState'] || '{}');
+      
+        // Loop through state array and restore checked 
+        // state for matching elements
+        for(var i in cbstate) {
+          var el = document.querySelector('input[name="' + i + '"]');
+          if (el) el.checked = true;
+        }
+      
+        // Get all checkboxes that you want to monitor state for
+        var cb = document.getElementsByClassName('save-cb-state');
+      
+        // Loop through results and ...
+        for(var i = 0; i < cb.length; i++) {
+      
+          //bind click event handler
+          cb[i].addEventListener('click', function(evt) {
+            // If checkboxe is checked then save to state
+            if (this.checked) {
+              cbstate[this.name] = true;
+            }
+        
+        // Else remove from state
+            else if (cbstate[this.name]) {
+              delete cbstate[this.name];
+            }
+        
+        // Persist state
+            localStorage.CBState = JSON.stringify(cbstate);
+          });
+        }
+      });
+    })();
+    </script>
+
+<script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+
+<script>
+    window.addEventListener("load", (event) => {
+  new cursoreffects.ghostCursor();
+});
+</script>
+</html>
